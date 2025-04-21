@@ -15,6 +15,9 @@ app.use('/url', cloudinaryUrlRoutes)
 const midjourneyRoutes = require('./routes/midjourney');
 app.use('/api', midjourneyRoutes)
 
+const imageHostingRoutes = require('./routes/imagehosting');
+app.use('/imagehost', imageHostingRoutes)
+
 app.get("/", (request, response)=> {
     response.status(200).json({ message: "Hello! Server is running"});
 });
