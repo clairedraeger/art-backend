@@ -3,7 +3,18 @@ const cors = require('cors');
 const app = express();
 
 const PORT = process.env.PORT || 4000;
-app.use(cors());
+
+// CORS set up
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://art-project-claire.onrender.com'
+];
+
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true,
+}));
+
 app.use(express.json());
 
 const cloudinaryRoutes = require('./routes/cloudinary');
