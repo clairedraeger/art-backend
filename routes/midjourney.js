@@ -29,58 +29,45 @@ router.post('/blend', async (req, res) => {
         }
       };
       const blendUrls = [userImageUrl, hardcodedImagePath];
-      const replyUrl = "https://art-backend-6mu2.onrender.com/api/blend-callback"; //CALLABCK URL
       data.body = JSON.stringify({ 
-        blendUrls, discord, channel, replyUrl 
+        blendUrls, discord, channel 
       });
 
       const response = await fetch(apiUrl, data);
       const result = await response.json();
       console.log("response", {response, result});
-      return res.status(200).json({ message: "Blend started" });
+      console.log("jobid ", result.jobid)
+      res.status(200).json(result.jobid);
     } catch (error) {
       console.error('Midjourney blend error:', error);
       res.status(500).json({ error: 'Failed to blend images' });
     }
   });
 
-  // Server-Sent Events (SSE)
-  let sseClients = [];
-
-  router.get('/blend/stream', (req, res) => {
-    res.setHeader('Content-Type', 'text/event-stream');
-    res.setHeader('Cache-Control', 'no-cache');
-    res.setHeader('Connection', 'keep-alive');
-    res.flushHeaders();
-
-    sseClients.push(res);
-
-    req.on('close', () => {
-      sseClients = sseClients.filter(client => client !== res);
-    });
-  });
-
-
-  //call back url
-  router.post('/blend-callback', express.json(), async (req, res) => {
+  router.post("/blend/get", async (req, res) => {
+    const { jobId } = req.body;
+    console.log("jobId ", {jobId});
+  
+    if (!jobId || jobId == 'undefined') {
+      return res.status(400).json({ error: "Missing jobId" });
+    }
+  
+    const token = process.env.USEAPI_TOKEN;
+    const apiUrl = `https://api.useapi.net/v2/jobs/?jobid=${jobId}`;
+  
     try {
-      const { status, result, error } = req.body;
+      const response = await fetch(apiUrl, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
   
-      if (status === 'completed' && result?.imageUrl) {
-        console.log('Blend completed:', result.imageUrl);
-  
-        // Notify all connected SSE clients
-        sseClients.forEach(client => {
-          client.write(`data: ${JSON.stringify({ imageUrl: result.imageUrl })}\n\n`);
-        });
-      } else if (status === 'failed') {
-        console.error('Blend failed:', error);
-      }
-  
-      res.status(200).json({ message: 'Callback received' });
-    } catch (err) {
-      console.error('Callback processing error:', err);
-      res.status(500).json({ error: 'Callback error' });
+      const result = await response.json();
+      console.log(result);
+      return res.json(result);
+    } catch (error) {
+      console.error("Error fetching job status:", error);
+      return res.status(500).json({ error: "Failed to fetch job status" });
     }
   });
   
