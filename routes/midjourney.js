@@ -14,7 +14,8 @@ router.post('/blend', async (req, res) => {
       if (!userImageUrl) {
         return res.status(400).json({ error: "Missing userImageUrl" });
       }
-      const hardcodedImagePath = "https://res.cloudinary.com/dlmkmswvp/image/upload/v1744833414/untitled_butt_apvbue.jpg";
+      // change blend image here
+      const hardcodedImagePath = "https://res.cloudinary.com/dlmkmswvp/image/upload/v1757965813/Screenshot_2025-09-15_at_3.48.13_PM_btcjc3.png";
   
       const apiUrl = 'https://api.useapi.net/v2/jobs/blend';
       const token = process.env.USEAPI_TOKEN;
