@@ -26,6 +26,9 @@ app.use('/url', cloudinaryUrlRoutes)
 const midjourneyRoutes = require('./routes/midjourney');
 app.use('/api', midjourneyRoutes)
 
+const blendSublimeRoute = require('./routes/replicate');
+app.use('/api', blendSublimeRoute);
+
 const imageHostingRoutes = require('./routes/imagehosting');
 app.use('/imagehost', imageHostingRoutes)
 
