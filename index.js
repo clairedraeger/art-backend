@@ -7,7 +7,8 @@ const PORT = process.env.PORT || 4000;
 // CORS set up
 const allowedOrigins = [
   'http://localhost:3000',
-  'https://art-project-claire.onrender.com'
+  'https://art-project-claire.onrender.com',
+  "https://art-project-sublime.onrender.com"
 ];
 
 app.use(cors({
