@@ -34,7 +34,7 @@ router.post('/blendsublime', async (req, res) => {
       cfg_scale: 3.5,
       num_steps: 30,
       num_samples: 3,
-      image1_strength: 1.75,
+      image1_strength: 1.85,
       image2_strength: 1,
     };
 
