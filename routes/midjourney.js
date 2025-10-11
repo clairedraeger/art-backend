@@ -17,7 +17,7 @@ router.post('/blend', async (req, res) => {
       // change blend image here
       // d: https://res.cloudinary.com/dlmkmswvp/image/upload/v1759516075/Screenshot_2025-10-03_at_2.27.43_PM_ggmbb8.png
       // j: https://res.cloudinary.com/dlmkmswvp/image/upload/v1757965813/Screenshot_2025-09-15_at_3.48.13_PM_btcjc3.png
-      const hardcodedImagePath = "https://res.cloudinary.com/dlmkmswvp/image/upload/v1759516075/Screenshot_2025-10-03_at_2.27.43_PM_ggmbb8.png";
+      const hardcodedImagePath = "https://res.cloudinary.com/dlmkmswvp/image/upload/v1757965813/Screenshot_2025-09-15_at_3.48.13_PM_btcjc3.png";
   
       const apiUrl = 'https://api.useapi.net/v2/jobs/blend';
       const token = process.env.USEAPI_TOKEN;
