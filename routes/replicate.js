@@ -15,7 +15,7 @@ router.post('/blendsublime', async (req, res) => {
 
     // Hardcoded reference image (the “sublime” style)
     const hardcodedImageUrl =
-      "https://res.cloudinary.com/dlmkmswvp/image/upload/v1759516075/Screenshot_2025-10-03_at_2.27.43_PM_ggmbb8.png";
+      "https://res.cloudinary.com/dlmkmswvp/image/upload/v1757965813/Screenshot_2025-09-15_at_3.48.13_PM_btcjc3.png";
 
     // Instantiate Replicate client
     const replicate = new Replicate({
